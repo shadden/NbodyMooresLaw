@@ -28,7 +28,9 @@ papers = {
     1991.1:(3e6/(2*MONTH),1,"Quinn+ '91",0),        
     1991:(1e9/(14*DAY),1,"Wisdom & Holman '91",0),
     2009:(5e9 / (2500*HR),1,"Laskar & Gastineau '09",0),
-    2023:(2 * 2750 * 5e9 / (2.5e6*HR) ,1,"Abbot+ '23",0)
+    2020:(5e9*96 / (6*12*MONTH),1,"Brown & Rein '20",0),
+    2023:(2 * 2750 * 5e9 / (2.5e6*HR) ,1,"Abbot+ '23",0),
+    2023.1:(1e9 / (DAY) ,1,"Pejvak+ '23",0),
 }
 
 # CPU clock speed data
