@@ -32,7 +32,7 @@ papers = {
 }
 
 # CPU clock speed data
-with open("microprocessor-trend-data/50yrs/frequency.dat","r") as fi:
+with open("./frequency.dat","r") as fi:
     lines = fi.readlines()
 freq_data=np.array([list(map(float,l.split())) for l in lines])
 yr,freq=freq_data.T
@@ -61,17 +61,26 @@ for year,data in papers.items():
         x,y = year,TO_MYR_PER_MONTH * rate / OUTER_TO_INNER_RESCALE 
         plt.scatter(x,y,color='k',marker='*',s=150)
         plt.text(x+0.2,y*1.25,label,ha='center',zorder=99,fontsize=12)
+# known planets
+ax.plot(
+    np.concatenate(([1940],np.sort(disc_years))),
+    np.arange(8,1+8+len(disc_years))
+    ,'k-',
+    lw=3,
+    label='Known Planets'
+)
+# CPU clock speed
+ax.plot(yr,freq,'b.',ms=3,zorder=0,label='CPU clock rates [MHz]')
 
+# Cosmetics
 plt.yscale('log')
 plt.ylabel("$N$",fontsize=16)
 plt.xlim(1945,2035)
-#plt.ylim(1e-10,10)
 plt.xlabel("Year",fontsize=16)
-
-ax.plot(yr,freq,'b.',ms=3,zorder=0,label='CPU clock rates [MHz]')
 plt.tick_params(labelsize=16,size=8,direction='in')
 plt.tick_params(size=6,which='minor',direction='in')
 plt.title("$N$-body simulations, computer efficiency, and planet discoveries",fontsize=16)
+plt.legend(loc='lower right',fontsize=12)
 plt.tight_layout()
 #"/Users/shadden/github_io_website/shadden.github.io/assets/images/Nbody-Moores-Law.png"
 plt.savefig("./Nbody-Moores-Law.png")
