@@ -25,12 +25,12 @@ papers = {
     1978:((40/365)/(10),0,"TRS-80",0),
     1984.1:(5e6/(4*HR),0,"Kinoshita & Nakai'84",1),
     1986:(60*1e8/(365*DAY),0,"Applegate+ '86",1),
-    1991.1:(3e6/(2*MONTH),1,"Quinn+ '91",0),        
+    1991.1:(3e6/(2*MONTH),1,"Quinn+ '91",0),
     1991:(1e9/(14*DAY),1,"Wisdom & Holman '91",0),
     2009:(5e9 / (2500*HR),1,"Laskar & Gastineau '09",0),
     2020:(5e9*96 / (6*12*MONTH),1,"Brown & Rein '20",0),
     2023:(2 * 2750 * 5e9 / (2.5e6*HR) ,1,"Abbot+ '23",0),
-    2023.1:(1e9 / (DAY) ,1,"Pejvak+ '23",0),
+    2023.1:(1e9 / (DAY) ,1,"Javaheri+ '23",0),
 }
 
 # CPU clock speed data
@@ -84,5 +84,5 @@ plt.tick_params(size=6,which='minor',direction='in')
 plt.title("$N$-body simulations, computer efficiency, and planet discoveries",fontsize=16)
 plt.legend(loc='lower right',fontsize=12)
 plt.tight_layout()
-#"/Users/shadden/github_io_website/shadden.github.io/assets/images/Nbody-Moores-Law.png"
-plt.savefig("./Nbody-Moores-Law.png")
+outfile = "/Users/shadden/github_io_website/shadden.github.io/assets/images/Nbody-Moores-Law.png"
+plt.savefig(outfile)
