@@ -87,3 +87,5 @@ plt.legend(loc='lower right',fontsize=12)
 plt.tight_layout()
 outfile = "/Users/shadden/github_io_website/shadden.github.io/assets/images/Nbody-Moores-Law.png"
 plt.savefig(outfile)
+outfile="/Users/shadden/DropboxPersonal/Apps/Overleaf/UCSD_research_statement/Nbody-Moores-Law.pdf"
+plt.savefig(outfile)
