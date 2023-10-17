@@ -31,7 +31,7 @@ papers = {
     2009:(5e9 / (2500*HR),1,"Laskar & Gastineau '09",0,"LG09"),
     2020:(5e9*96 / (6*12*MONTH),1,"Brown & Rein '20",0,"BR20"),
     2023:(2 * 2750 * 5e9 / (2.5e6*HR) ,1,"Abbot+ '23",0,"A+23"),
-    2023.1:(1e9 / (DAY) ,1,"Javaheri+ '23",0,"JRT23"),
+    2023.1:(5e9 / (DAY) ,1,"Javaheri+ '23",0,"JRT23"),
 }
 
 # CPU clock speed data
