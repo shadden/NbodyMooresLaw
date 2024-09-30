@@ -20,6 +20,7 @@ HR = 60 * MIN
 DAY = 24 * HR
 MONTH = 30 * DAY
 S=8
+WH512_eff = 1e9 / (8*HR) #5e9 / (DAY)
 papers = {
     1952:((40/365)/(2*MIN),0,"Ekert '52",0,"EBC52",(S,S)),
     1965:((1500)/(HR),0,"Cohen & Hubbard '65",0,"CH65",(S,S)),
@@ -33,7 +34,7 @@ papers = {
     2009:(5e9 / (2500*HR),1,"Laskar & Gastineau '09",0,"LG09",(S,S)),
     2020:(5e9*96 / (6*12*MONTH),1,"Brown & Rein '20",0,"BR20",(-5*S,S)),
     2023:(2 * 2750 * 5e9 / (2.5e6*HR) ,1,"Abbot+ '23",0,"A+23",(S,S)),
-    2023.1:(5e9 / (DAY) ,1,"Javaheri+ '23",0,"JRT23",(S,S)),
+    2023.1:(WH512_eff,1,"Javaheri+ '23",0,"JRT23",(S,S)),
 }
 
 # CPU clock speed data
@@ -52,6 +53,31 @@ fig=plt.figure(figsize=(10,7))
 ax = plt.gca()
 plt.tick_params(labelsize=16,size=8,direction='in')
 plt.tick_params(size=6,which='minor',direction='in')
+
+# Cosmetics
+plt.yscale('log')
+ax.set_ylim(9e-6,10**(5.5))
+ax.set_yticks(10.**np.arange(-5,6))
+minor_tx = np.array([np.arange(2,10) * pow10 for pow10 in 10.**np.arange(-5,6)])
+minor_tx = minor_tx.reshape(-1)
+ax.set_yticks(minor_tx,minor=True)
+plt.xlim(1945,2035)
+plt.ylim(9e-06, 900000.0)
+plt.tick_params(labelsize=20,size=8,direction='in')
+plt.tick_params(size=6,which='minor',direction='in')
+plt.ylabel("$N$",fontsize=24)
+plt.xlabel("Year",fontsize=24)
+plt.title("$N$-body simulations, CPU efficiency,\nand planet discoveries",fontsize=24)
+
+plt.tight_layout()
+
+
+# CPU clock speed
+ax.plot(yr,freq,'bs',ms=8,zorder=0,label='CPU clock rates [MHz]')
+plt.legend(loc='lower right',fontsize=16)
+#plt.savefig("./Nbody_moores_2.pdf")
+
+# N-body integrations
 TO_MYR_PER_MONTH = MONTH/1e6
 for year,data in papers.items():
     rate,inner,label,hardware,shortname,txtoffset=data
@@ -85,6 +111,9 @@ for year,data in papers.items():
             bbox=dict(boxstyle='round,pad=0.2', fc='yellow', alpha=1)
             )
     print(label, np.log10(y))
+plt.legend(loc='lower right',fontsize=16)
+plt.savefig("./Nbody_moores_alt_1.pdf")
+
 # known planets
 ax.plot(
     np.concatenate(([1940],np.sort(disc_years))),
@@ -94,27 +123,14 @@ ax.plot(
     lw=6,
     label='Known Planets'
 )
-# CPU clock speed
-ax.plot(yr,freq,'bs',ms=8,zorder=0,label='CPU clock rates [MHz]')
-#set_xticks([20, 200, 500])
-
-# Cosmetics
-plt.yscale('log')
-ax.set_ylim(9e-6,10**(5.5))
-ax.set_yticks(10.**np.arange(-5,6))
-minor_tx = np.array([np.arange(2,10) * pow10 for pow10 in 10.**np.arange(-5,6)])
-minor_tx = minor_tx.reshape(-1)
-ax.set_yticks(minor_tx,minor=True)
-plt.ylabel("$N$",fontsize=18)
-plt.xlim(1945,2035)
-plt.xlabel("Year",fontsize=18)
-plt.tick_params(labelsize=18,size=8,direction='in')
-plt.tick_params(size=6,which='minor',direction='in')
-plt.title("$N$-body simulations, CPU efficiency, and planet discoveries",fontsize=16)
+plt.legend()
 plt.legend(loc='lower right',fontsize=16)
-plt.tight_layout()
+plt.savefig("./Nbody_moores_alt_2.pdf")
+
+
+
 outfile = "/Users/shadden/github_io_website/shadden.github.io/assets/images/Nbody-Moores-Law.png"
 plt.savefig(outfile)
-outfile="/Users/shadden/DropboxPersonal/Apps/Overleaf/UCSD_research_statement/Nbody-Moores-Law.pdf"
-plt.savefig(outfile)
-plt.show()
+# outfile="/Users/shadden/DropboxPersonal/Apps/Overleaf/UofI_research_statement_2023/Nbody-Moores-Law.pdf"
+# plt.savefig(outfile)
+# plt.show()
